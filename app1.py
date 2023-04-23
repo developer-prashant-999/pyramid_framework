@@ -37,60 +37,71 @@ def benford(request):
     else:
         html = """
         <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Benford's Law Checker</title>
-            <style>
-              body {
-                font-family: sans-serif;
-                margin: 0;
-                padding: 0;
-              }
-              h1 {
-                background-color: #1a1a1a;
-                color: white;
-                margin: 0;
-                padding: 1em;
-              }
-              form {
-                background-color: #f2f2f2;
-                border: 1px solid #ccc;
-                margin: 2em auto;
-                padding: 1em;
-                max-width: 600px;
-              }
-              label {
-                display: block;
-                font-weight: bold;
-                margin-bottom: 0.5em;
-              }
-              input[type="file"] {
-                display: block;
-                margin-bottom: 1em;
-              }
-              button[type="submit"] {
-                background-color: #4CAF50;
-                border: none;
-                color: white;
-                cursor: pointer;
-                font-size: 1.2em;
-                padding: 0.5em 1em;
-                transition: background-color 0.2s;
-              }
-              button[type="submit"]:hover {
-                background-color: #0099ff;
-              }
-            </style>
-          </head>
-          <body>
-            <h1>Benford's Law Checker</h1>
-            <form method="POST" enctype="multipart/form-data">
-              <label for="csv_file">Select a CSV file:</label>
-              <input type="file" name="csv_file" id="csv_file">
-              <button type="submit">Check</button>
-            </form>
-          </body>
-        </html>
+<html>
+  <head>
+    <title>Benford's Law Checker</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        background-color: #1a1a1a;
+        color: white;
+        margin: 0;
+        padding: 1em;
+      }
+      form {
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        margin: 2em auto;
+        padding: 1em;
+        max-width: 600px;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+      }
+      input[type="file"] {
+        display: block;
+        margin-bottom: 1em;
+      }
+      button[type="submit"] {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 1.2em;
+        padding: 0.5em 1em;
+        transition: background-color 0.2s;
+      }
+      button[type="submit"]:hover {
+        background-color: #0099ff;
+      }
+    </style>
+    <script>
+      function validateForm() {
+        var fileInput = document.getElementById('csv_file');
+        if (!fileInput || !fileInput.files || !fileInput.files[0]) {
+          alert('Please select a CSV file.');
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Benford's Law Checker</h1>
+    <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm();">
+      <label for="csv_file">Select a CSV file:</label>
+      <input type="file" name="csv_file" id="csv_file">
+      <button type="submit">Check</button>
+    </form>
+  </body>
+</html>
+
         """
         return Response(html)
 
